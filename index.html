@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Count registers, compare expected cash, and prepare final drops locally in your browser."
+    />
+    <meta name="theme-color" content="#173f3a" />
+    <title>Count With Emma</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="calculator.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <noscript>
+      <div class="noscript">Count With Emma needs JavaScript enabled to calculate register totals.</div>
+    </noscript>
+
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Count With Emma home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span>
+          <strong>Count With Emma</strong>
+          <small>Close clean. Get home sooner.</small>
+        </span>
+      </a>
+      <div class="privacy-note"><span aria-hidden="true">●</span> Private &amp; local</div>
+    </header>
+
+    <main>
+      <nav class="progress" aria-label="Closeout progress">
+        <ol>
+          <li data-progress-step="0" class="progress--active" aria-current="step"><span>1</span> Expected</li>
+          <li data-progress-step="1"><span>2</span> Count</li>
+          <li data-progress-step="2"><span>3</span> Closeout</li>
+        </ol>
+      </nav>
+
+      <section id="setup-step" class="step step--active" aria-labelledby="setup-title">
+        <div class="intro">
+          <p class="eyebrow">Nightly register closeout</p>
+          <h1 id="setup-title">Set tonight’s register totals.</h1>
+          <p>Enter the expected cash for each register and the amount that should remain after closing.</p>
+        </div>
+
+        <form id="setup-form" class="setup-card" autocomplete="off">
+          <div class="setup-fields">
+            <label class="money-field">
+              <span>Register 1 expected</span>
+              <span class="input-shell input-shell--large">
+                <span class="prefix">$</span>
+                <input id="expected-r1" name="expected-r1" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00" required autofocus />
+              </span>
+            </label>
+            <label class="money-field">
+              <span>Register 2 expected</span>
+              <span class="input-shell input-shell--large">
+                <span class="prefix">$</span>
+                <input id="expected-r2" name="expected-r2" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00" required />
+              </span>
+            </label>
+            <label class="money-field">
+              <span>Closing target per register</span>
+              <span class="input-shell input-shell--large">
+                <span class="prefix">$</span>
+                <input id="closing-target" name="closing-target" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" required />
+              </span>
+            </label>
+          </div>
+          <button class="button button--primary" type="submit">Start counting <span aria-hidden="true">→</span></button>
+          <p class="local-note">Nothing is saved or sent anywhere.</p>
+        </form>
+      </section>
+
+      <section id="count-step" class="step" aria-labelledby="count-title" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Step 2 of 3</p>
+            <h1 id="count-title">Count what’s in each register.</h1>
+            <p>Enter the number of bills and coins—not their dollar value.<span id="count-target-note" class="target-note"></span></p>
+          </div>
+          <button id="edit-expected" class="button button--quiet" type="button">Edit expected totals &amp; target</button>
+        </div>
+
+        <form id="count-form" autocomplete="off">
+          <div id="count-summary" class="count-summary-bar" aria-label="Live register totals"></div>
+          <div id="register-counts" class="register-grid"></div>
+          <div id="variance-notices" class="variance-notices" aria-live="polite"></div>
+          <div class="form-actions">
+            <p>Blank fields count as zero. Press Enter to move to the next count.</p>
+            <button class="button button--primary" type="submit">Prepare final drops <span aria-hidden="true">→</span></button>
+          </div>
+        </form>
+      </section>
+
+      <section id="results-step" class="step" aria-labelledby="results-title" hidden>
+        <div class="section-heading results-heading">
+          <div>
+            <p class="eyebrow">Step 3 of 3</p>
+            <h1 id="results-title">Your closeout is ready.</h1>
+            <p>Pull the drop amounts shown, then leave the closing counts in each register.</p>
+          </div>
+          <div class="heading-actions">
+            <button id="edit-counts" class="button button--quiet" type="button">Edit counts</button>
+            <button id="print-closeout" class="button button--outline" type="button">Print closeout</button>
+            <button id="start-over" class="button button--outline" type="button">Start over</button>
+          </div>
+        </div>
+        <div class="print-heading" aria-hidden="true">
+          <strong>Count With Emma</strong>
+          <span>Register closeout</span>
+        </div>
+        <div id="drop-summary" class="drop-summary"></div>
+        <div id="results" class="results-grid"></div>
+      </section>
+    </main>
+
+    <footer>Count With Emma <span aria-hidden="true">·</span> Calculations stay on this device.</footer>
+  </body>
+</html>
